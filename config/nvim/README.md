@@ -1,5 +1,5 @@
 # Neovim setup
-![](https://github.com/saocodon/dotfiles/blob/master/config/shot/shot.png)
+![](https://github.com/saocodon/dotfiles/blob/main/config/nvim/shot/shot.png)
 ## Requirements
 - Linux (replace `apt` with your package manager)
 - [Neovim](https://neovim.io/)
