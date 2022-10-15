@@ -1,0 +1,9 @@
+window:
+  opacity: 0.9
+font:
+  normal:
+    family: Meslo LG S DZ
+    style: Regular
+  italic:
+    family: Meslo LG L
+    style: Italic

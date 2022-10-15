@@ -1,0 +1,132 @@
+" CP configuration for GVIM on Windows 7, font is set to Courier New
+
+" Vim with all enhancements
+source $VIMRUNTIME/vimrc_example.vim
+
+" Remap a few keys for Windows behavior
+source $VIMRUNTIME/mswin.vim
+
+" Mouse behavior (the Windows way)
+behave mswin
+
+" Use the internal diff if available.
+" Otherwise use the special 'diffexpr' for Windows.
+if &diffopt !~# 'internal'
+  set diffexpr=MyDiff()
+endif
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg1 = substitute(arg1, '!', '\!', 'g')
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg2 = substitute(arg2, '!', '\!', 'g')
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  let arg3 = substitute(arg3, '!', '\!', 'g')
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      if empty(&shellxquote)
+        let l:shxq_sav = ''
+        set shellxquote&
+      endif
+      let cmd = '"' . $VIMRUNTIME . '\diff"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  let cmd = substitute(cmd, '!', '\!', 'g')
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+  if exists('l:shxq_sav')
+    let &shellxquote=l:shxq_sav
+  endif
+endfunction
+
+if has("gui_running")
+	if has("gui_gtk2")
+		set guifont=Inconsolata \12
+	elseif has("gui_macvim")
+		set guifont=Menlo\ Regular:h14
+	elseif has("gui_win32")
+		set guifont=Courier\ New:h14:cANSI
+	endif
+endif
+
+set laststatus=2
+if !has('gui_running')
+    set t_Co=256
+endif
+
+call plug#begin('c:/program files/vim/plugged')
+" Theme
+Plug 'joshdick/onedark.vim'
+" Status bar
+Plug 'itchyny/lightline.vim'
+" File browser
+Plug 'scrooloose/nerdtree'
+" Syntax highlighting
+Plug 'sheerun/vim-polyglot'
+" Inserting/deleting brackets in pairs
+Plug 'jiangmiao/auto-pairs'
+call plug#end()
+
+" ------------------------ Plugin settings ----------------------------
+" Theme
+if has('termguicolors')
+	set termguicolors
+endif
+set background=dark
+syntax on
+colorscheme onedark
+" Lightline
+let g:lightline = {
+      \ 'colorscheme': 'one',
+      \ 'background': 'dark'
+      \ }
+" ------------------------- Local settings ----------------------------
+set noshowmode        " Hide status
+set relativenumber    " Relative numbering
+set smartindent       " Makes indenting smart
+set expandtab         " Converts tabs to spaces
+set linebreak         " Word wrap
+set autoindent
+set shiftwidth=4
+set tabstop=8         " Tabs are at proper location
+set nohlsearch        " Remove searching highlight occurences
+set foldmethod=indent
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
+set showtabline=2     " Always show tabs
+" ------------------------- Commands ----------------------------------
+" Compile
+cnoremap wc w <bar> !g++ -std=c++11 -O2 -Wall % -o %:r
+" ------------------------ Auto-commands ------------------------------
+" When Vim starts up
+" Add Termdebug
+autocmd VimEnter * packadd termdebug
+" ------------------------- Keymap ------------------------------------
+" Map <leader> to <SPACE>
+let mapleader = ' '
+" NerdTree
+nnoremap <silent><leader>f :NERDTreeFind<CR>
+nnoremap <silent><leader>t :NERDTreeToggle<CR>
+" Switch tab using TAB
+nnoremap <silent><TAB> :bnext<CR>
+nnoremap <silent><S-TAB> :bprevious<CR>
+nnoremap <silent><C-t> :tabnew<CR>
+" Switch between multiple files
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+" Fast navigation
+nnoremap m 10j
+nnoremap , 10k
+" Leave terminal mode
+tnoremap <Esc> <C-\><C-n>
