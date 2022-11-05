@@ -1,0 +1,136 @@
+set ratios 1:2:3
+set cleaner ~/.config/lf/cleaner
+set previewer ~/.config/lf/preview
+# Basic Settings
+set drawbox true
+set ignorecase true
+set icons true
+
+# Custom Functions
+#cmd open ${{
+#    case $(file --mime-type "$f" -bL) in
+#        text/*|application/json) $EDITOR "$f";;
+#        *) xdg-open "$f" ;;
+#    esac
+#}}
+cmd open ${{
+    case "$f" in
+        *.png|*.jpeg|*.jpg|*.gif|*.svg) feh "$f";;
+        *.mp3|*.mpa|*.ogg|*.wav|*.wma|*.wpl|*.avi|*.flv|*.mpv|*.mkv|*.mov|*.mp4|*.mpg|*.mpeg|*.wmv|*.swf) vlc "$f";;
+        *.sh) sh "$f" ;;
+        *.EXE|*.exe) WINEARCH=win32 WINEPREFIX=~/win32/ wine "$f";;
+        *) nvim "$f" ;;
+    esac
+}}
+
+cmd mkdir ${{
+  printf "Directory Name: "
+  read ans
+  mkdir $ans
+}}
+
+cmd mkfile ${{
+  printf "File Name: "
+  read ans
+  nvim $ans
+}}
+
+cmd chmod ${{
+  printf "Mode Bits: "
+  read ans
+
+  for file in "$fx"
+  do
+    chmod $ans $file
+  done
+
+  lf -remote 'send reload'
+}}
+
+cmd sudomkfile ${{
+  printf "File Name: "
+  read ans
+  sudo $EDITOR $ans
+}}
+
+# Archive bindings
+cmd unarchive ${{
+  case "$f" in
+      *.zip) unzip "$f" ;;
+      *.tar.gz) tar -xzvf "$f" ;;
+      *.tar.bz2) tar -xjvf "$f" ;;
+      *.tar) tar -xvf "$f" ;;
+      *.rar|*.7z) 7zz x "$f" -o"*" ;;
+      *) echo "Unsupported format" ;;
+  esac
+}}
+
+cmd zip %7zz a "$f"
+cmd tar %tar cvf "$f.tar" "$f"
+cmd targz %tar cvzf "$f.tar.gz" "$f"
+cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
+cmd slz %7zz l "$f"
+
+cmd dragon %dragon-drop -a -x $fx
+cmd dragon-stay %dragon-drop -a $fx
+cmd dragon-individual %dragon-drop $fx
+cmd cpdragon !~/scripts/cpdragon.sh
+cmd mvdragon !~/scripts/mvdragon.sh
+cmd dlfile !~/scripts/dlfile.sh
+
+# Bindings
+# Remove some defaults
+map m
+map o
+map n
+map "'"
+map '"'
+map d
+# map c
+map e
+map f
+
+# File Editors
+map ee !nvim "$f"
+
+# Archive Mappings
+map az zip
+map at tar
+map ag targz
+map ab targz
+map au unarchive
+
+# Basic Functions
+map . set hidden!
+map DD delete
+map p paste
+map x cut
+map y copy
+map <enter> open
+map mf mkfile
+map mr sudomkfile
+map md mkdir
+map ms $mkscript
+map ch chmod
+map bg setwallpaper
+map r rename
+map H top
+map L bottom
+map R reload
+map C clear
+map U unselect
+
+# Dragon Mapping
+map dr dragon
+map ds dragon-stay
+map di dragon-individual
+map dm mvdragon
+map dc cpdragon
+map dl dlfile
+
+# Movement
+map gvn cd ~/Documents/CP/VNOJ/MDC
+map gcf cd ~/Documents/CP/Codeforces
+map gos cd ~/Documents/Schoolwork/Notes/
+map gwn cd ~/win32/drive_c/Program\ Files
+map gh cd ~

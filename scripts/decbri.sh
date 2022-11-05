@@ -1,5 +1,5 @@
 #!/bin/bash
-val=`cat ~/.brightness`
+val=`cat ~/scripts/brightness`
 val=`echo "$val-0.05" | bc`
 xrandr --output eDP-1 --brightness $val
-echo "$val" > ~/.brightness
+echo "$val" > ~/scripts/brightness
