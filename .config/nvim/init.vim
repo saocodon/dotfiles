@@ -27,6 +27,7 @@ let g:lightline = {
       \ }
 
 set noshowmode        " Hide status
+set number            " Show current line number
 set relativenumber    " Relative numbering
 set smartindent       " Makes indenting smart
 set expandtab         " Converts tabs to spaces
