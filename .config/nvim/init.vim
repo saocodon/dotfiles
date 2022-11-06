@@ -19,6 +19,7 @@ endif
 set background=dark
 syntax on
 colorscheme onedark
+hi Normal guibg=NONE ctermbg=NONE " Transparent Vim
 " Lightline
 let g:lightline = {
       \ 'colorscheme': 'one',
