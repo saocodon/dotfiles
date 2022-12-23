@@ -1,9 +1,13 @@
 call plug#begin('~/.config/nvim/plugged')
 
 " Theme
-Plug 'joshdick/onedark.vim'
+" Plug 'joshdick/onedark.vim'
+" Plug 'arcticicestudio/nord-vim'
+Plug 'sainnhe/gruvbox-material'
 " Status bar
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " File browser
 Plug 'scrooloose/nerdtree'
 " Syntax highlighting
@@ -11,19 +15,23 @@ Plug 'sheerun/vim-polyglot'
 " Inserting/deleting brackets in pairs
 Plug 'jiangmiao/auto-pairs'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Speed up coding process
+Plug 'searleser97/cpbooster.vim'
 call plug#end()
 
 if has('termguicolors')
 	set termguicolors
 endif
 set background=dark
+let g:gruvbox_material_background = 'hard'
+let g:gruvbox_material_better_performance = 1
+let g:airline#extensions#tabline#enabled = 1
 syntax on
-colorscheme onedark
-hi Normal guibg=NONE ctermbg=NONE " Transparent Vim
+colorscheme gruvbox-material
+
 " Lightline
 let g:lightline = {
-      \ 'colorscheme': 'one',
-      \ 'background': 'dark'
+      \ 'colorscheme': 'nord',
       \ }
 
 set noshowmode        " Hide status
@@ -34,7 +42,7 @@ set expandtab         " Converts tabs to spaces
 set linebreak         " Word wrap
 set autoindent
 set shiftwidth=4
-set tabstop=8         " Tabs are at proper location
+" set tabstop=8         " Tabs are at proper location
 set nohlsearch        " Remove searching highlight occurences
 set foldmethod=indent
 set foldnestmax=10
@@ -49,6 +57,8 @@ cnoremap wc w <bar> !g++ -std=c++11 -O2 -Wall % -o %:r
 " When Vim starts up
 " Add Termdebug
 autocmd VimEnter * packadd termdebug
+" Return the cursor for Alacritty
+au VimLeave * set guicursor=a:ver100
 " ------------------------- Keymap ------------------------------------
 " Map <leader> to <SPACE>
 let mapleader = ' '

@@ -41,7 +41,7 @@ nvim
 ```
 - Copy from [coc-settings.json](https://github.com/saocodon/dotfiles/blob/main/config/nvim/coc-settings.json)
 - Copy example coc key bindings and other vim config from [here](https://github.com/neoclide/coc.nvim#example-vim-configuration).
-- Enable C++17: copy [.ccls](https://github.com/saocodon/dotfiles/blob/main/config/nvim/plug/coc/.ccls) in root project folder.
+- Enable C++17: copy [.ccls](https://github.com/saocodon/dotfiles/blob/main/.config/nvim/plug/coc/.ccls) in root project folder.
 
 [Full guide](https://www.youtube.com/watch?v=ViHgyApE9zM)
 

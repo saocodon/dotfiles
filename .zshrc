@@ -16,6 +16,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
+#ZSH_THEME="agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -126,19 +127,17 @@ if [[ "$(tty)" = "/dev/tty1" ]]; then
 	pgrep i3 || startx
 fi
 
-export PATH="$HOME/.local/bin:$HOME/Documents/CP/scripts:$HOME/Documents/Software/7zip:$PATH"
+export PATH="$HOME/.local/bin:$HOME/Documents/CP/scripts:$HOME/Documents/Software/Portable/7zip:$PATH"
 
 alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
 alias lf='~/.config/lf/lfrun'
-
-export GTK_IM_MODULE=ibus
-export QT_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
-export QT4_IM_MODULE=ibus
-export CLUTTER_IM_MODULE=ibus
+alias nb='newsboat'
+alias pomatez='gtk-launch pomatez.desktop'
+alias wrun='WINEARCH=win32 WINEPREFIX=~/win32/ wine'
 
 ibus engine BambooUs::Flag
 xrandr --output eDP-1 --brightness $(cat ~/scripts/brightness)
+sudo modprobe kvmgt mdev vfio
 
 [ -f ~/.config/LF_ICONS ] && {
 	LF_ICONS="$(tr '\n' ':' <~/.config/LF_ICONS)" \
