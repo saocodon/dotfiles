@@ -1,3 +1,3 @@
-This is an implementation of my home folder.
-# Gruvbox material
-![](https://github.com/saocodon/dotfiles/blob/main/rice.png)
+# Gruvbox material + Nord
+![](https://github.com/saocodon/dotfiles/blob/main/img1.png)
+![](https://github.com/saocodon/dotfiles/blob/main/img2.png)
