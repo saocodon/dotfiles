@@ -1,0 +1,9 @@
+pgrep -x sxhkd > /dev/null || sxhkd &
+/home/duy/scripts/time.sh &
+wmname LG3D &
+nitrogen --restore &
+ibus-daemon -drx &
+xrandr --output eDP-1 --brightness $(cat ~/scripts/brightness)
+picom &
+flameshot &
+redshift &
